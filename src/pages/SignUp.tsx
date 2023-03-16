@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {
+  // getAuth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from 'firebase/auth';
+import { db, auth } from '../firebase.config';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
@@ -23,6 +29,30 @@ const SignUp = () => {
     }));
   };
 
+  const onsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const user = userCredential.user;
+
+      if (auth.currentUser !== null) {
+        updateProfile(auth.currentUser, {
+          displayName: name,
+        });
+      }
+
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <Section>
       <div className='authentication-container'>
@@ -31,7 +61,7 @@ const SignUp = () => {
         </header>
 
         <main>
-          <form className='flex flex-col space-y-5'>
+          <form onSubmit={onsubmit} className='flex flex-col space-y-5'>
             <div className='relative w-full xs:max-w-max'>
               <FaUserAlt className='authentication-icon' />
               <input
