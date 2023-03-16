@@ -12,6 +12,13 @@
   user-select: none;
 }
 
+body {
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: white;
+}
+
 @layer utilities {
   .max-w-8xl {
     max-width: 112rem;
@@ -20,9 +27,6 @@
 
 /* Base styles */
 @layer base {
-  body {
-    @apply w-screen min-h-screen overflow-x-hidden bg-slate-300;
-  }
   header {
     @apply relative z-20 flex items-center justify-between h-28 bg-recipease-50 text-white;
   }

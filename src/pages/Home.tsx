@@ -1,8 +1,11 @@
+import Section from '../components/shared/Section';
+
 const Home = () => {
   return (
-    <section className='p-7 overflow-x-hidden ml-20 w-full '>
+    <Section>
       <h1 className='text-2xl font-semibold'>Home</h1>
-    </section>
+    </Section>
   );
 };
+
 export default Home;

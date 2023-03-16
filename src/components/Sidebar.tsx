@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   BsArrowLeftSquareFill,
   BsSearch,
@@ -12,6 +13,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   return (
     <div className='fixed left-0 top-0 bottom-0 z-10'>
@@ -41,7 +43,7 @@ const Sidebar = () => {
           <BsSearch
             className={`absolute right-0 top-0 p-3 w-11 h-full text-white text-2xl border-none outline-none cursor-pointer ${
               open
-                ? 'rounded-r-md bg-slate-500 hover:bg-slate-400'
+                ? 'rounded-r-md bg-recipease-200 hover:bg-recipease-100'
                 : 'btn btn-ghost rounded-md'
             }`}
             onClick={() => {
@@ -52,13 +54,25 @@ const Sidebar = () => {
         </div>
 
         <ul className='text-white'>
-          <li className='sidebar-item'>
+          <li
+            onClick={() => {
+              navigate('/');
+              setOpen(false);
+            }}
+            className='sidebar-item'
+          >
             <span className='text-2xl'>
               <AiFillHome />
             </span>
             <span className={`font-medium ${!open && 'hidden'}`}>Home</span>
           </li>
-          <li className='sidebar-item'>
+          <li
+            onClick={() => {
+              navigate('/about');
+              setOpen(false);
+            }}
+            className='sidebar-item'
+          >
             <span className='text-2xl'>
               <BsFillQuestionSquareFill />
             </span>
@@ -84,26 +98,142 @@ const Sidebar = () => {
           </li>
 
           <ul
-            className={` h-0 overflow-auto transition-all duration-100 ${
+            className={` h-0 overflow-auto transition-all duration-300 ${
               open && submenuOpen && 'h-44'
             }`}
           >
-            <li className='category'>Asian</li>
-            <li className='category'>Beverages</li>
-            <li className='category'>Breakfast</li>
-            <li className='category'>Desserts</li>
-            <li className='category'>Gluten-Free</li>
-            <li className='category'>Breakfast</li>
-            <li className='category'>Desserts</li>
-            <li className='category'>Gluten-Free</li>
-            <li className='category'>Asian</li>
-            <li className='category'>Beverages</li>
-            <li className='category'>Breakfast</li>
-            <li className='category'>Desserts</li>
-            <li className='category'>Gluten-Free</li>
-            <li className='category'>Breakfast</li>
-            <li className='category'>Desserts</li>
-            <li className='category'>Gluten-Free</li>
+            <li onClick={() => navigate('/asian')} className='category'>
+              Asian
+            </li>
+            <li onClick={() => navigate('/beverages')} className='category'>
+              Beverages
+            </li>
+            <li
+              onClick={() => {
+                navigate('/breakfast');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Breakfast
+            </li>
+            <li
+              onClick={() => {
+                navigate('/desserts');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Desserts
+            </li>
+            <li
+              onClick={() => {
+                navigate('/gluten');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Gluten-Free
+            </li>
+            <li
+              onClick={() => {
+                navigate('/breakfast');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Breakfast
+            </li>
+            <li
+              onClick={() => {
+                navigate('/desserts');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Desserts
+            </li>
+            <li
+              onClick={() => {
+                navigate('/gluten');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Gluten-Free
+            </li>
+            <li
+              onClick={() => {
+                navigate('/asian');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Asian
+            </li>
+            <li
+              onClick={() => {
+                navigate('/beverages');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Beverages
+            </li>
+            <li
+              onClick={() => {
+                navigate('/breakfast');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Breakfast
+            </li>
+            <li
+              onClick={() => {
+                navigate('/desserts');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Desserts
+            </li>
+            <li
+              onClick={() => {
+                navigate('/gluten');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Gluten-Free
+            </li>
+            <li
+              onClick={() => {
+                navigate('/breakfast');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Breakfast
+            </li>
+            <li
+              onClick={() => {
+                navigate('/desserts');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Desserts
+            </li>
+            <li
+              onClick={() => {
+                navigate('/gluten');
+                setOpen(false);
+              }}
+              className='category'
+            >
+              Gluten-Free
+            </li>
           </ul>
         </ul>
       </div>
