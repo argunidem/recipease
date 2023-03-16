@@ -16,7 +16,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='fixed left-0 top-0 bottom-0 z-10'>
+    <div className='fixed left-0 top-0 bottom-0 z-20'>
       <div
         className={`relative bg-recipease-50 h-screen p-5 pt-7 ${
           open ? 'w-72' : 'w-20'

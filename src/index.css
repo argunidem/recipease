@@ -28,7 +28,7 @@ body {
 /* Base styles */
 @layer base {
   header {
-    @apply relative z-20 flex items-center justify-between h-28 bg-recipease-50 text-white;
+    @apply relative z-30 flex items-center justify-between h-28 bg-recipease-50 text-white;
   }
   h1 {
     @apply font-raleway font-black tracking-tight align-middle text-3xl xs:text-4xl sm:text-5xl;
@@ -45,6 +45,25 @@ body {
   }
   .category {
     @apply btn-ghost mt-1 pl-7 py-1 font-red-hat font-extralight text-sm rounded-md cursor-pointer;
+  }
+}
+
+/* Authentication Pages' Components */
+@layer components {
+  .authentication-container {
+    @apply flex flex-col items-center space-y-7 md:space-y-12 px-4 pt-16;
+  }
+  .authentication-heading {
+    @apply text-2xl xs:text-4xl text-center font-bold text-slate-700;
+  }
+  .authentication-input {
+    @apply w-full xs:w-72 pl-9 bg-slate-800 placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700;
+  }
+  .authentication-link {
+    @apply font-bold text-recipease-200 transition duration-200 hover:text-recipease-100;
+  }
+  .authentication-icon {
+    @apply absolute left-3 top-4 z-10;
   }
 }
 
