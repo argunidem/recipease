@@ -64,13 +64,13 @@ input:-webkit-autofill {
   .form {
     @apply flex flex-col space-y-5;
   }
+  .input-field {
+    @apply w-full min-w-[200px] xs:w-72 pl-9 bg-slate-800 text-sm placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700 selection:bg-slate-500 selection:text-slate-800;
+  }
 }
 
 /* Authentication Pages' Components */
 @layer components {
-  .authentication-input {
-    @apply w-full xs:w-72 pl-9 bg-slate-800 placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700 selection:bg-slate-500 selection:text-slate-800;
-  }
   .authentication-link {
     @apply font-bold text-recipease-200 transition duration-200 hover:text-recipease-100;
   }

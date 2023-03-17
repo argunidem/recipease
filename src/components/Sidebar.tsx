@@ -34,7 +34,7 @@ const Sidebar = () => {
             type='text'
             placeholder='Search'
             ref={inputRef}
-            className={`duration-300  ${
+            className={`duration-300 ${
               open
                 ? 'w-full pr-11 pl-2 bg-white text-slate-600 font-semibold selection:bg-slate-700 selection:text-white'
                 : 'w-0  bg-transparent'

@@ -7,6 +7,7 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
 import Section from '../components/shared/Section';
+import OAuth from '../components/OAuth';
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -61,7 +62,7 @@ const SignIn = () => {
                 value={email}
                 onChange={onchange}
                 required
-                className='authentication-input'
+                className='input-field'
               />
             </div>
 
@@ -74,7 +75,7 @@ const SignIn = () => {
                 value={password}
                 onChange={onchange}
                 required
-                className='authentication-input'
+                className='input-field'
               />
               {showPassword ? (
                 <MdVisibilityOff
@@ -100,7 +101,7 @@ const SignIn = () => {
             </div>
           </form>
 
-          {/* Google OAuth */}
+          <OAuth />
 
           <p className='mt-8 text-right text-slate-600'>
             Don't have an account?

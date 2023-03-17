@@ -1,9 +1,8 @@
-import { useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateProfile } from 'firebase/auth';
 import { updateDoc, doc } from 'firebase/firestore';
 import { db, auth } from '../firebase.config';
-import { AuthContext } from '../context/auth/AuthContext';
 import { toast } from 'react-toastify';
 import Section from '../components/shared/Section';
 
@@ -13,7 +12,6 @@ type FormType = {
 };
 
 const Profile = () => {
-  const context = useContext(AuthContext);
   const [changeDetails, setChangeDetails] = useState(false);
   const [formData, setFormData] = useState<FormType>({
     name: '',
@@ -25,18 +23,10 @@ const Profile = () => {
 
   useEffect(() => {
     setFormData({
-      name: context?.user.name || '',
-      email: context?.user.email || '',
+      name: auth.currentUser?.displayName || '',
+      email: auth.currentUser?.email || '',
     });
-  }, [context]);
-
-  if (!context?.user.name && !context?.user.email) {
-    return (
-      <p className='absolute left-1/2 top-1/2 -translate-x-1/2 translate-y-1/2'>
-        Loading user information...
-      </p>
-    );
-  }
+  }, [auth]);
 
   const onLogout = () => {
     auth.signOut();
@@ -45,7 +35,7 @@ const Profile = () => {
 
   const onSubmit = async () => {
     try {
-      if (auth.currentUser && context?.user.name !== name) {
+      if (auth.currentUser && auth.currentUser.displayName !== name) {
         await updateProfile(auth.currentUser, {
           displayName: name,
         });
@@ -80,7 +70,7 @@ const Profile = () => {
         </button>
       </header>
 
-      <main className='container'>
+      <div className='container'>
         <div className='flex flex-col space-y-8 xs:flex-row xs:space-y-0 xs:justify-between items-center space-x-4 sm:space-x-36 mb-4'>
           <p className='text-recipease-100 font-semibold text-center xs:text-left sm:text-2xl'>
             Personal Details
@@ -101,7 +91,7 @@ const Profile = () => {
             <input
               type='text'
               id='name'
-              className={`px-3 xs:px-4 rounded-md authentication-input ${
+              className={`input-field px-3 xs:px-4 rounded-md ${
                 !changeDetails && 'disabled:bg-white'
               }`}
               disabled={!changeDetails}
@@ -111,7 +101,7 @@ const Profile = () => {
             <input
               type='text'
               id='email'
-              className={`px-3 xs:px-4 rounded-md authentication-input ${
+              className={`input-field px-3 xs:px-4 rounded-md ${
                 !changeDetails && 'disabled:bg-white'
               }`}
               disabled={!changeDetails}
@@ -120,7 +110,7 @@ const Profile = () => {
             />
           </form>
         </div>
-      </main>
+      </div>
     </Section>
   );
 };

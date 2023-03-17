@@ -6,8 +6,10 @@ import { setDoc, doc, serverTimestamp, FieldValue } from 'firebase/firestore';
 import { db, auth } from '../firebase.config';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
+import { AiOutlineMail } from 'react-icons/ai';
 import { FiArrowRight } from 'react-icons/fi';
 import Section from '../components/shared/Section';
+import OAuth from '../components/OAuth';
 
 type SignUpDataTypes = {
   name: string;
@@ -69,7 +71,7 @@ const SignUp = () => {
           <p className='heading'>Create Account</p>
         </header>
 
-        <main>
+        <div>
           <form onSubmit={onsubmit} className='form'>
             <div className='relative w-full xs:max-w-max'>
               <FaUserAlt className='authentication-icon' />
@@ -80,12 +82,12 @@ const SignUp = () => {
                 value={name}
                 onChange={onchange}
                 required
-                className='authentication-input'
+                className='input-field'
               />
             </div>
 
             <div className='relative w-full xs:max-w-max'>
-              <FaUserAlt className='authentication-icon' />
+              <AiOutlineMail className='authentication-icon' />
               <input
                 type='email'
                 placeholder='Email'
@@ -93,7 +95,7 @@ const SignUp = () => {
                 value={email}
                 onChange={onchange}
                 required
-                className='authentication-input'
+                className='input-field'
               />
             </div>
 
@@ -106,7 +108,7 @@ const SignUp = () => {
                 value={password}
                 onChange={onchange}
                 required
-                className='authentication-input'
+                className='input-field'
               />
               {showPassword ? (
                 <MdVisibilityOff
@@ -132,7 +134,7 @@ const SignUp = () => {
             </div>
           </form>
 
-          {/* Google OAuth */}
+          <OAuth />
 
           <p className='mt-8 text-right text-slate-600'>
             Already have an account?
@@ -140,7 +142,7 @@ const SignUp = () => {
           <Link to='/sign-in' className='authentication-link block text-right'>
             Sign in
           </Link>
-        </main>
+        </div>
       </div>
     </Section>
   );
