@@ -80,7 +80,10 @@ const Sidebar = () => {
           </li>
           <li
             className='sidebar-item'
-            onClick={() => setSubmenuOpen(!submenuOpen)}
+            onClick={() => {
+              setSubmenuOpen(!submenuOpen);
+              if (!open) setOpen(true);
+            }}
           >
             <span className='text-2xl'>
               <BiCategory />

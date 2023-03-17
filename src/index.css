@@ -43,20 +43,10 @@ input:-webkit-autofill {
   }
 }
 
-/* Sidebar Components */
-@layer components {
-  .sidebar-item {
-    @apply flex items-center gap-x-4 btn-ghost cursor-pointer mt-5 px-2 py-3 rounded-md;
-  }
-  .category {
-    @apply btn-ghost mt-1 pl-7 py-1 font-red-hat font-extralight text-sm rounded-md cursor-pointer;
-  }
-}
-
-/* General Components */
+/* Shared Components */
 @layer components {
   .container {
-    @apply flex flex-col items-center space-y-7 md:space-y-12 px-4 pt-16;
+    @apply flex flex-col items-center space-y-7 mx-auto md:space-y-12 px-4 pt-16;
   }
   .heading {
     @apply text-2xl xs:text-4xl text-center font-bold text-slate-700;
@@ -69,6 +59,16 @@ input:-webkit-autofill {
   }
 }
 
+/* Sidebar Components */
+@layer components {
+  .sidebar-item {
+    @apply flex items-center gap-x-4 btn-ghost cursor-pointer mt-5 px-2 py-3 rounded-md;
+  }
+  .category {
+    @apply btn-ghost mt-1 pl-7 py-1 font-red-hat font-extralight text-sm rounded-md cursor-pointer;
+  }
+}
+
 /* Authentication Pages' Components */
 @layer components {
   .authentication-link {
@@ -76,6 +76,13 @@ input:-webkit-autofill {
   }
   .authentication-icon {
     @apply absolute left-3 top-4 z-10;
+  }
+}
+
+/* About Page Components */
+@layer components {
+  .about-p {
+    @apply mt-3 text-recipease-100;
   }
 }
 
