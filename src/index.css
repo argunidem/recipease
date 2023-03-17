@@ -19,6 +19,11 @@ body {
   background-color: white;
 }
 
+input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px #2d3748 !important;
+  -webkit-text-fill-color: #c9c9c9 !important;
+}
+
 @layer utilities {
   .max-w-8xl {
     max-width: 112rem;
@@ -48,16 +53,23 @@ body {
   }
 }
 
-/* Authentication Pages' Components */
+/* General Components */
 @layer components {
-  .authentication-container {
+  .container {
     @apply flex flex-col items-center space-y-7 md:space-y-12 px-4 pt-16;
   }
-  .authentication-heading {
+  .heading {
     @apply text-2xl xs:text-4xl text-center font-bold text-slate-700;
   }
+  .form {
+    @apply flex flex-col space-y-5;
+  }
+}
+
+/* Authentication Pages' Components */
+@layer components {
   .authentication-input {
-    @apply w-full xs:w-72 pl-9 bg-slate-800 placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700;
+    @apply w-full xs:w-72 pl-9 bg-slate-800 placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700 selection:bg-slate-500 selection:text-slate-800;
   }
   .authentication-link {
     @apply font-bold text-recipease-200 transition duration-200 hover:text-recipease-100;

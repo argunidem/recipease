@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import {
-  // getAuth,
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from 'firebase/auth';
+import { toast } from 'react-toastify';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { setDoc, doc, serverTimestamp, FieldValue } from 'firebase/firestore';
 import { db, auth } from '../firebase.config';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
 import Section from '../components/shared/Section';
+
+type SignUpDataTypes = {
+  name: string;
+  email: string;
+  password?: string;
+  timestamp?: FieldValue;
+};
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,27 +46,31 @@ const SignUp = () => {
 
       const user = userCredential.user;
 
-      if (auth.currentUser !== null) {
-        updateProfile(auth.currentUser, {
-          displayName: name,
-        });
-      }
+      updateProfile(userCredential.user, {
+        displayName: name,
+      });
+
+      const formDataCopy: SignUpDataTypes = { ...formData };
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp();
+
+      await setDoc(doc(db, 'users', user.uid), formDataCopy);
 
       navigate('/');
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong with registration');
     }
   };
 
   return (
     <Section>
-      <div className='authentication-container'>
+      <div className='container'>
         <header className='bg-white z-0'>
-          <p className='authentication-heading'>Create Account</p>
+          <p className='heading'>Create Account</p>
         </header>
 
         <main>
-          <form onSubmit={onsubmit} className='flex flex-col space-y-5'>
+          <form onSubmit={onsubmit} className='form'>
             <div className='relative w-full xs:max-w-max'>
               <FaUserAlt className='authentication-icon' />
               <input
@@ -114,7 +123,7 @@ const SignUp = () => {
 
             <div className='py-8 flex flex-col items-center space-y-3 xs:flex-row-reverse xs:justify-between xs:items-center xs:space-y-0'>
               <button className='px-3 py-1 font-bold rounded-md transition duration-200 text-slate-600 hover:text-slate-200 group hover:bg-recipease-100'>
-                Log In
+                Sign Up
                 <FiArrowRight className='text-slate-800 group-hover:text-slate-200 inline pl-1 text-xl' />
               </button>
               <Link to='/forgot-password' className='authentication-link'>

@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../firebase.config';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
@@ -22,15 +25,33 @@ const SignIn = () => {
     }));
   };
 
+  const onsubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      if (userCredential.user) {
+        navigate('/');
+      }
+    } catch (error) {
+      toast.error('Bad user credentials');
+    }
+  };
+
   return (
     <Section>
-      <div className='authentication-container'>
+      <div className='container'>
         <header className='bg-white z-0'>
-          <p className='authentication-heading'>Welcome to Recipease!</p>
+          <p className='heading'>Welcome to Recipease!</p>
         </header>
 
         <main>
-          <form className='flex flex-col space-y-5'>
+          <form onSubmit={onsubmit} className='form'>
             <div className='relative w-full xs:max-w-max'>
               <FaUserAlt className='authentication-icon' />
               <input
