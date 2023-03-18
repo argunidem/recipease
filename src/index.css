@@ -82,7 +82,7 @@ input:-webkit-autofill {
 /* About Page Components */
 @layer components {
   .about-p {
-    @apply mt-3 text-recipease-100;
+    @apply mt-3 text-recipease-100 text-center;
   }
 }
 

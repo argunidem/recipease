@@ -8,11 +8,11 @@ import {
   orderBy,
   limit,
   startAfter,
-  Timestamp,
 } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import { toast } from 'react-toastify';
 import Section from '../components/shared/Section';
+import Preview from '../components/Preview';
 import Spinner from '../components/shared/Spinner';
 
 const Category = () => {
@@ -49,8 +49,6 @@ const Category = () => {
       } catch (error) {
         toast.error('Could not fetch recipes');
       }
-
-      console.log(recipes);
     };
 
     fetchRecipes();
@@ -58,7 +56,7 @@ const Category = () => {
 
   return (
     <Section>
-      <header className='text-3xl text-recipease-100 bg-white'>
+      <header className='z-10 text-3xl text-recipease-100 bg-white'>
         {params.categoryId?.charAt(0).toUpperCase() +
           (params.categoryId?.slice(1) || '')}
       </header>
@@ -68,23 +66,7 @@ const Category = () => {
       ) : recipes && recipes.length > 0 ? (
         <div className='container'>
           {recipes.map((recipe: any) => (
-            <article
-              key={recipe.id}
-              className='flex space-x-6 rounded-md bg-recipease-200 p-2'
-            >
-              <div className='avatar'>
-                <div className='w-64 h-64 rounded'>
-                  <img src={recipe.data.imgUrls[0]} />
-                </div>
-              </div>
-              <div className='flex flex-col pr-6'>
-                <p className='text-white text-2xl mb-1'>{recipe.data.name}</p>
-                <p className='text-white'>{recipe.data.description}</p>
-                <button className='self-end btn bg-slate-800 w-max text-white'>
-                  View Recipe
-                </button>
-              </div>
-            </article>
+            <Preview key={recipe.id} recipe={recipe} />
           ))}
         </div>
       ) : (

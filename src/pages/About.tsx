@@ -3,7 +3,7 @@ import Section from '../components/shared/Section';
 const About = () => {
   return (
     <Section>
-      <div className='container'>
+      <div className='container sm:pt-24 lg:pt-32 md:w-5/6 xl:w-3/5 2xl:w-2/5'>
         <article>
           <h2 className='heading text-recipease-200'>About Recipease</h2>
           <p className='about-p'>
