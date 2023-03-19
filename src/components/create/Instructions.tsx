@@ -42,7 +42,7 @@ const Instructions = ({ listHandler }: IngredientsProps) => {
           onChange={onchange}
           placeholder='Type Instruction'
           rows={6}
-          className='input-field pl-1 pr-16 pt-2 outline-none focus:outline-none rounded-br-none textarea textarea-lg'
+          className='input-field -mb-1.5 pl-1 pr-16 pt-2 outline-none focus:outline-none rounded-br-none textarea textarea-lg'
         />
       </div>
       <button
