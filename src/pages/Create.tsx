@@ -7,6 +7,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from 'firebase/storage';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase.config';
 import Section from '../components/shared/Section';
 import Ingredients from '../components/create/Ingredients';
@@ -32,7 +33,7 @@ const Create = () => {
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     description: '',
-    category: '',
+    category: 'Appetizers',
     ingredients: [],
     instructions: [],
     images: {},
@@ -105,7 +106,18 @@ const Create = () => {
     });
     //.
 
+    const formDataCopy = {
+      ...formData,
+      imgUrls,
+      timestamp: serverTimestamp(),
+      category: category.toLowerCase(),
+    };
+    delete formDataCopy.images;
+
+    const docRef = await addDoc(collection(db, 'recipes'), formDataCopy);
     setLoading(false);
+    toast.success('Recipe created');
+    navigate(`/${formData.category.toLowerCase()}`);
   };
 
   const onchange = (
