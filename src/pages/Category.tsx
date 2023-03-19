@@ -12,7 +12,7 @@ import {
 import { db } from '../firebase.config';
 import { toast } from 'react-toastify';
 import Section from '../components/shared/Section';
-import Preview from '../components/Preview';
+import Preview from '../components/layout/Preview';
 import Spinner from '../components/shared/Spinner';
 
 const Category = () => {
@@ -52,11 +52,11 @@ const Category = () => {
     };
 
     fetchRecipes();
-  }, []);
+  }, [params.categoryId]);
 
   return (
     <Section>
-      <header className='z-10 text-3xl text-recipease-100 bg-white'>
+      <header className='text-3xl text-recipease-100'>
         {params.categoryId?.charAt(0).toUpperCase() +
           (params.categoryId?.slice(1) || '')}
       </header>

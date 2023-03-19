@@ -25,8 +25,8 @@ const ForgotPassword = () => {
 
   return (
     <Section>
-      <header className='bg-white z-0 sm:mx-12'>
-        <p className='heading'>Forgot Password</p>
+      <header>
+        <p className='heading mx-auto'>Forgot Password</p>
       </header>
       <div className='container'>
         <form onSubmit={onsubmit} className='form'>

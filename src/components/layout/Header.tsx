@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../context/auth/AuthContext';
+import { AuthContext } from '../../context/auth/AuthContext';
 import { BsPersonFillAdd, BsPersonCircle } from 'react-icons/bs';
 import { FiLogIn } from 'react-icons/fi';
 
@@ -9,7 +9,7 @@ const Header = () => {
   const context = useContext(AuthContext);
 
   return (
-    <header>
+    <header className='z-30 bg-recipease-50 text-white'>
       <section className='w-full mx-auto pl-3 pr-5 xs:pl-8 xs:pr-10 xl:w-5/6 max-w-8xl flex justify-between items-center'>
         <h1>Recipease</h1>
         {context?.checkingStatus ? (

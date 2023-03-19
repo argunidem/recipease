@@ -4,9 +4,7 @@ import Section from '../components/shared/Section';
 const Home = () => {
   return (
     <Section>
-      <header className='z-10 bg-white text-recipease-100 text-xl'>
-        Latest Recipes
-      </header>
+      <header className='text-recipease-100 text-xl'>Latest Recipes</header>
 
       <div className='container'>
         <article className='card bg-recipease-200 py-6 pr-4'>

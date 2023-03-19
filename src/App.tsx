@@ -9,9 +9,10 @@ import Profile from './pages/Profile';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
-import Private from './components/Private';
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
+import Private from './components/auth/Private';
+import Create from './pages/Create';
+import Header from './components/layout/Header';
+import Sidebar from './components/layout/Sidebar';
 
 const App = () => {
   return (
@@ -24,6 +25,9 @@ const App = () => {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/:categoryId' element={<Category />} />
+            <Route path='/create' element={<Private />}>
+              <Route path='/create' element={<Create />} />
+            </Route>
             <Route path='/profile' element={<Private />}>
               <Route path='/profile' element={<Profile />} />
             </Route>

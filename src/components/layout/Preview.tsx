@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Card from '../components/shared/Card';
+import Card from '../shared/Card';
 
 const Preview = ({ recipe }: any) => {
   const [width, setWidth] = useState(window.innerWidth);

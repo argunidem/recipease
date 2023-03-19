@@ -20,7 +20,7 @@ body {
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #2d3748 !important;
+  -webkit-box-shadow: inset 0 0 0 50px #43537d !important;
   -webkit-text-fill-color: #c9c9c9 !important;
 }
 
@@ -33,7 +33,7 @@ input:-webkit-autofill {
 /* Base styles */
 @layer base {
   header {
-    @apply relative z-30 flex items-center justify-between h-28 bg-recipease-50 text-white;
+    @apply relative flex items-center justify-between h-28;
   }
   h1 {
     @apply font-raleway font-black tracking-tight align-middle text-3xl xs:text-4xl sm:text-5xl;
@@ -49,13 +49,13 @@ input:-webkit-autofill {
     @apply flex flex-col items-center space-y-7 mx-auto md:space-y-12 px-4 pt-16;
   }
   .heading {
-    @apply text-2xl xs:text-4xl text-center font-bold text-slate-700;
+    @apply text-2xl xs:text-4xl text-center font-bold text-recipease-300;
   }
   .form {
-    @apply flex flex-col space-y-5;
+    @apply flex flex-col items-center space-y-5;
   }
   .input-field {
-    @apply w-full min-w-[200px] xs:w-72 pl-9 bg-slate-800 text-sm placeholder:text-gray-400 placeholder:font-semibold focus:bg-slate-700 selection:bg-slate-500 selection:text-slate-800;
+    @apply w-full min-w-[200px] xs:w-72 pl-9 text-sm placeholder:text-gray-400 placeholder:font-semibold focus:bg-recipease-400 selection:bg-slate-500 selection:text-slate-800;
   }
 }
 
@@ -65,7 +65,7 @@ input:-webkit-autofill {
     @apply flex items-center gap-x-4 btn-ghost cursor-pointer mt-5 px-2 py-3 rounded-md;
   }
   .category {
-    @apply btn-ghost mt-1 pl-7 py-1 font-red-hat font-extralight text-sm rounded-md cursor-pointer;
+    @apply btn-ghost mt-1 ml-3 font-red-hat font-extralight text-sm rounded-md cursor-pointer;
   }
 }
 

@@ -9,7 +9,7 @@ import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
 import { FiArrowRight } from 'react-icons/fi';
 import Section from '../components/shared/Section';
-import OAuth from '../components/OAuth';
+import OAuth from '../components/auth/OAuth';
 
 type SignUpDataTypes = {
   name: string;
@@ -67,7 +67,7 @@ const SignUp = () => {
   return (
     <Section>
       <div className='container'>
-        <header className='bg-white z-0'>
+        <header>
           <p className='heading'>Create Account</p>
         </header>
 

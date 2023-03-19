@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { AuthContext } from '../context/auth/AuthContext';
-import Spinner from './shared/Spinner';
+import { AuthContext } from '../../context/auth/AuthContext';
+import Spinner from '../shared/Spinner';
 
 const Private = () => {
   const context = useContext(AuthContext);

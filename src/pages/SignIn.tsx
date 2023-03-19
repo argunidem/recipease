@@ -7,7 +7,7 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 import { FiArrowRight } from 'react-icons/fi';
 import Section from '../components/shared/Section';
-import OAuth from '../components/OAuth';
+import OAuth from '../components/auth/OAuth';
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -47,7 +47,7 @@ const SignIn = () => {
   return (
     <Section>
       <div className='container'>
-        <header className='bg-white z-0'>
+        <header>
           <p className='heading'>Welcome to Recipease!</p>
         </header>
 

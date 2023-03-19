@@ -59,7 +59,7 @@ const Profile = () => {
 
   return (
     <Section>
-      <header className='bg-white z-0 sm:mx-12'>
+      <header className='md:mx-12 xl:mx-48 2xl:mx-72'>
         <p className='heading'>My Profile</p>
         <button
           type='button'
