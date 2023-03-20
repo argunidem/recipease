@@ -11,6 +11,7 @@ import SignUp from './pages/SignUp';
 import ForgotPassword from './pages/ForgotPassword';
 import Private from './components/auth/Private';
 import Create from './pages/Create';
+import Recipe from './pages/Recipe';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar';
 
@@ -24,7 +25,8 @@ const App = () => {
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
-            <Route path='/:categoryId' element={<Category />} />
+            <Route path='/:category' element={<Category />} />
+            <Route path='/:category/:recipeId' element={<Recipe />} />
             <Route path='/create' element={<Private />}>
               <Route path='/create' element={<Create />} />
             </Route>

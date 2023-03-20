@@ -19,6 +19,22 @@ body {
   background-color: white;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #203260;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #394c77;
+}
+
 input:-webkit-autofill {
   -webkit-box-shadow: inset 0 0 0 50px #43537d !important;
   -webkit-text-fill-color: #c9c9c9 !important;

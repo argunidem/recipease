@@ -28,7 +28,7 @@ const Category = () => {
 
         const q = query(
           recipesRef,
-          where('category', '==', params.categoryId),
+          where('category', '==', params.category),
           orderBy('timestamp', 'desc'),
           limit(10)
         );
@@ -52,25 +52,25 @@ const Category = () => {
     };
 
     fetchRecipes();
-  }, [params.categoryId]);
+  }, [params.category]);
 
   return (
     <Section>
       <header className='text-3xl text-recipease-100'>
-        {params.categoryId?.charAt(0).toUpperCase() +
-          (params.categoryId?.slice(1) || '')}
+        {params.category?.charAt(0).toUpperCase() +
+          (params.category?.slice(1) || '')}
       </header>
 
       {loading ? (
         <Spinner />
       ) : recipes && recipes.length > 0 ? (
-        <div className='container'>
+        <div className='container space-y-16 md:space-y-20'>
           {recipes.map((recipe: any) => (
             <Preview key={recipe.id} recipe={recipe} />
           ))}
         </div>
       ) : (
-        <p>No recipes in {params.categoryId} category yet.</p>
+        <p>No recipes in {params.category} category yet.</p>
       )}
     </Section>
   );

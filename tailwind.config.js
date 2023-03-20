@@ -29,6 +29,11 @@ module.exports = {
           600: '#96B4FF',
         },
       },
+      height: {
+        76: '19rem',
+        100: '25rem',
+        104: '26rem',
+      },
     },
   },
   plugins: [require('daisyui')],

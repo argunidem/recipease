@@ -1,14 +1,9 @@
 import { Fragment, useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth/AuthContext';
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
-import { db } from '../firebase.config';
+import { db, storage } from '../firebase.config';
 import Section from '../components/shared/Section';
 import Ingredients from '../components/create/Ingredients';
 import Instructions from '../components/create/Instructions';
@@ -25,7 +20,7 @@ type FormDataType = {
   category: string;
   ingredients: string[];
   instructions: string[];
-  images: any;
+  image: any;
   userRef: string;
 };
 
@@ -36,12 +31,12 @@ const Create = () => {
     category: 'Appetizers',
     ingredients: [],
     instructions: [],
-    images: {},
+    image: null,
     userRef: '',
   });
   const [loading, setLoading] = useState(false);
 
-  const { name, description, category, ingredients, instructions, images } =
+  const { name, description, category, ingredients, instructions, image } =
     formData;
 
   const navigate = useNavigate();
@@ -58,66 +53,27 @@ const Create = () => {
 
     setLoading(true);
 
-    //. Store images in firebase
-    const storeImage = async (image: any) => {
-      return new Promise((resolve, reject) => {
-        const storage = getStorage();
-        const fileName = `${context?.user?.id}-${image.name}-${uuidv4()}`;
+    try {
+      const fileName = `${context?.user?.id}-${image[0].name}-${uuidv4()}`;
+      const storageRef = ref(storage, 'images/' + fileName);
 
-        const storageRef = ref(storage, 'images/' + fileName);
+      await uploadBytes(storageRef, image[0]);
+      const url = await getDownloadURL(storageRef);
 
-        const uploadTask = uploadBytesResumable(storageRef, image);
+      const formDataCopy = {
+        ...formData,
+        image: url,
+        timestamp: serverTimestamp(),
+        category: category.toLowerCase(),
+      };
 
-        uploadTask.on(
-          'state_changed',
-          (snapshot) => {
-            const progress =
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log('Upload is ' + progress + '% done');
-            switch (snapshot.state) {
-              case 'paused':
-                console.log('Upload is paused');
-                break;
-              case 'running':
-                console.log('Upload is running');
-                break;
-              default:
-                break;
-            }
-          },
-          (error) => {
-            reject(error);
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              resolve(downloadURL);
-            });
-          }
-        );
-      });
-    };
-
-    const imgUrls = await Promise.all(
-      [...images].map((image) => storeImage(image))
-    ).catch(() => {
+      await addDoc(collection(db, 'recipes'), formDataCopy);
       setLoading(false);
-      toast.error('Images not uploaded');
-      return;
-    });
-    //.
-
-    const formDataCopy = {
-      ...formData,
-      imgUrls,
-      timestamp: serverTimestamp(),
-      category: category.toLowerCase(),
-    };
-    delete formDataCopy.images;
-
-    const docRef = await addDoc(collection(db, 'recipes'), formDataCopy);
-    setLoading(false);
-    toast.success('Recipe created');
-    navigate(`/${formData.category.toLowerCase()}`);
+      toast.success('Recipe created');
+      navigate(`/${formData.category.toLowerCase()}`);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onchange = (
@@ -126,10 +82,10 @@ const Create = () => {
     >
   ) => {
     const files = (e.target as HTMLInputElement).files;
-    if (files) {
+    if (files && e.target.type === 'file') {
       setFormData((prevState) => ({
         ...prevState,
-        images: files,
+        image: files,
       }));
     } else {
       setFormData((prevState) => ({
@@ -241,7 +197,7 @@ const Create = () => {
               />
               <button
                 type='submit'
-                className='btn w-full text-white bg-emerald-700 border-none '
+                className='btn w-full text-white bg-recipease-50 border-none '
               >
                 Create Recipe
               </button>
