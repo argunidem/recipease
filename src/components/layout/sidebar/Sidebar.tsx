@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { AuthContext } from '../../context/auth/AuthContext';
+import { AuthContext } from '../../../context/auth/AuthContext';
+import Categories from './Categories';
 import {
   BsArrowLeftSquareFill,
   BsSearch,
   BsFillQuestionSquareFill,
-  BsChevronDown,
 } from 'react-icons/bs';
 import { AiFillHome, AiOutlinePlus } from 'react-icons/ai';
-import { BiCategory } from 'react-icons/bi';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(false);
@@ -111,91 +110,7 @@ const Sidebar = () => {
             </span>
             <span className={`font-medium ${!open && 'hidden'}`}>About</span>
           </Link>
-          <div
-            onClick={() => {
-              if (open) {
-                setSubmenuOpen(!submenuOpen);
-              } else if (!open) {
-                setOpen(true);
-                setSubmenuOpen(true);
-              }
-            }}
-            className={`sidebar-item ${!open && 'justify-center'}`}
-          >
-            <span className='text-2xl'>
-              <BiCategory />
-            </span>
-            <span className={`font-medium flex-1 ${!open && 'hidden'}`}>
-              Categories
-            </span>
-            {open && (
-              <BsChevronDown
-                className={`mr-1 duration-300 ${
-                  submenuOpen && '-rotate-[180deg]'
-                }`}
-              />
-            )}
-          </div>
-          <ul
-            className={`h-0 overflow-auto transition-all duration-300 ${
-              open && submenuOpen && 'h-44'
-            }`}
-          >
-            <li className='category'>
-              <Link
-                to='/appetizers'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Appetizers
-              </Link>
-            </li>
-            <li className='category'>
-              <Link
-                to='/baking'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Baking
-              </Link>
-            </li>
-            <li className='category'>
-              <Link
-                to='/breakfast'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Breakfast
-              </Link>
-            </li>
-            <li className='category'>
-              <Link
-                to='/desserts'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Desserts
-              </Link>
-            </li>
-            <li className='category'>
-              <Link
-                to='/grilling'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Grilling
-              </Link>
-            </li>
-            <li className='category'>
-              <Link
-                to='/soups'
-                onClick={() => setOpen(false)}
-                className='block py-1 pl-2'
-              >
-                Soups
-              </Link>
-            </li>
-          </ul>
+          <Categories states={{ open, setOpen, submenuOpen, setSubmenuOpen }} />
         </div>
       </div>
     </div>

@@ -1,18 +1,28 @@
-import { Fragment, useState, useEffect, useContext } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase.config';
-import { AuthContext } from '../context/auth/AuthContext';
 import Section from '../components/shared/Section';
 import Spinner from '../components/shared/Spinner';
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const context = useContext(AuthContext);
+  const [username, setUsername] = useState('');
 
   const navigate = useNavigate();
   const params: any = useParams();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userDoc = await getDoc(doc(db, 'users', recipe?.userRef));
+      if (userDoc.exists()) {
+        setUsername(userDoc.data().name);
+      }
+    };
+
+    if (recipe) fetchUser();
+  }, [recipe]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -39,14 +49,14 @@ const Recipe = () => {
 
   return (
     <Section>
-      <div className='relative flex flex-col max-w-7xl mx-auto mt-20 rounded-md xs:px-4 xs:mt-28 md:mt-32'>
+      <div className='relative flex flex-col max-w-7xl mx-auto my-20 rounded-md xs:px-4 xs:mt-28 md:mt-32'>
         {loading ? (
           <Spinner />
         ) : (
           <Fragment>
             <div>
               <span className='absolute -top-9 left-0 text-xs xs:left-3.5 sm:text-sm sm:-top-6 '>
-                by {context?.user?.username}
+                by {username}
               </span>
               <span className='absolute -top-5 left-0 text-xs xs:left-3.5 sm:text-sm sm:-top-6 sm:left-auto sm:right-3.5'>
                 {recipe.date}

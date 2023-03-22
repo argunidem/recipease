@@ -13,7 +13,7 @@ import Private from './components/auth/Private';
 import Create from './pages/Create';
 import Recipe from './pages/Recipe';
 import Header from './components/layout/Header';
-import Sidebar from './components/layout/Sidebar';
+import Sidebar from './components/layout/sidebar/Sidebar';
 
 const App = () => {
   return (

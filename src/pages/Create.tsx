@@ -9,6 +9,7 @@ import Ingredients from '../components/create/Ingredients';
 import Instructions from '../components/create/Instructions';
 import Spinner from '../components/shared/Spinner';
 import { v4 as uuidv4 } from 'uuid';
+import { categories, categorySlugs } from '../categories';
 import { BiCategory } from 'react-icons/bi';
 import { ImSpoonKnife } from 'react-icons/im';
 import { MdOutlineDescription } from 'react-icons/md';
@@ -64,13 +65,13 @@ const Create = () => {
         ...formData,
         image: url,
         timestamp: serverTimestamp(),
-        category: category.toLowerCase(),
+        category: category.replace(/\s+/g, '-').toLowerCase(),
       };
 
       await addDoc(collection(db, 'recipes'), formDataCopy);
       setLoading(false);
       toast.success('Recipe created');
-      navigate(`/${formData.category.toLowerCase()}`);
+      navigate(`/${formData.category.replace(/\s+/g, '-').toLowerCase()}`);
     } catch (error) {
       console.log(error);
     }
@@ -167,18 +168,9 @@ const Create = () => {
                   required
                   className='input-field select outline-none focus:outline-none'
                 >
-                  <option>Appetizers</option>
-                  <option>Baking</option>
-                  <option>Beverages</option>
-                  <option>Breakfast</option>
-                  <option>Desserts</option>
-                  <option>Grilling</option>
-                  <option>Pasta</option>
-                  <option>Salads</option>
-                  <option>Seafood</option>
-                  <option>Snacks</option>
-                  <option>Soups</option>
-                  <option>Vegetarian</option>
+                  {categories.map((category: string, index: number) => (
+                    <option key={index}>{category}</option>
+                  ))}
                 </select>
               </div>
 
