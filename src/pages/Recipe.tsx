@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect, useContext } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDoc, doc } from 'firebase/firestore';
-import { auth, db } from '../firebase.config';
+import { db } from '../firebase.config';
 import { AuthContext } from '../context/auth/AuthContext';
 import Section from '../components/shared/Section';
 import Spinner from '../components/shared/Spinner';
@@ -39,36 +39,67 @@ const Recipe = () => {
 
   return (
     <Section>
-      <div className='relative flex flex-col items-stretch max-w-7xl mx-auto mt-20 rounded-md xs:px-4 xs:mt-28 md:mt-32'>
+      <div className='relative flex flex-col max-w-7xl mx-auto mt-20 rounded-md xs:px-4 xs:mt-28 md:mt-32'>
         {loading ? (
           <Spinner />
         ) : (
           <Fragment>
-            {/* {date && (
-              
-            )}
-              */}
-            <Fragment>
+            <div>
               <span className='absolute -top-9 left-0 text-xs xs:left-3.5 sm:text-sm sm:-top-6 '>
                 by {context?.user?.username}
               </span>
               <span className='absolute -top-5 left-0 text-xs xs:left-3.5 sm:text-sm sm:-top-6 sm:left-auto sm:right-3.5'>
                 {recipe.date}
               </span>
-            </Fragment>
-            <div className='flex flex-col w-full bg-recipease-600 text-white rounded-t-md md:flex-row'>
+            </div>
+            <div className='flex flex-col bg-recipease-600 text-white rounded-t-md md:flex-row'>
               <img
                 loading='lazy'
                 src={recipe.image}
                 alt='food'
-                className='w-full h-52 object-cover object-center rounded-t-md xs:h-80 sm:h-100 md:w-2/5 md:h-96 md:rounded-tr-none'
+                className='w-full h-52 object-cover object-center rounded-t-md xs:h-80 md:w-2/5 sm:h-100 md:h-auto md:rounded-tr-none xl:h-96'
               />
-              <p className='self-center p-4 text-sm sm:py-10 md:justify-self-end md:py-0 mdlg:leading-6 lg:text-base lg:px-5 lg:leading-7 xl:leading-8 2xl:text-lg'>
-                {recipe.description}
-              </p>
+              <div className='self-center p-4 sm:py-5 lg:px-7'>
+                <h3 className='mb-1 text-lg font-bold sm:mb-2 mdlg:font-extrabold mdlg:text-xl'>
+                  {recipe.name}
+                </h3>
+                <p className='text-sm md:justify-self-end mdlg:leading-6 mdlg:text-base mdlg:font-light lg:leading-7 xl:leading-8 2xl:text-lg'>
+                  {recipe.description}
+                </p>
+              </div>
             </div>
-            <div className='w-full h-96 bg-white border-r border-l border-slate-200'></div>
-            <div className='w-full h-96 bg-recipease-500 rounded-b-md'></div>
+            <div className='flex flex-col justify-center items-center space-y-3 p-4 bg-white text-recipease-600 border-x border-slate-200 sm:py-8 sm:space-y-5'>
+              <h3 className='font-extrabold'>Ingredients</h3>
+              <ul
+                className={`${
+                  recipe.ingredients.length > 8 &&
+                  'xl:w-3/5 xl:mx-auto xl:grid xl:grid-cols-2 xl:pl-4'
+                }`}
+              >
+                {recipe.ingredients.map(
+                  (ingredient: string[], index: number) => (
+                    <li key={index} className='mb-1 ml-5 list-disc font-light'>
+                      {ingredient}
+                    </li>
+                  )
+                )}
+              </ul>
+            </div>
+            <div className='flex flex-col justify-center items-center space-y-3 p-4 bg-recipease-500 text-white rounded-b-md sm:py-8 sm:space-y-5'>
+              <h3 className='font-extrabold'>Instructions</h3>
+              <ol className=''>
+                {recipe.instructions.map(
+                  (instruction: string[], index: number) => (
+                    <li
+                      key={index}
+                      className='mb-1 ml-5 list-decimal text-sm font-medium'
+                    >
+                      {instruction}
+                    </li>
+                  )
+                )}
+              </ol>
+            </div>
           </Fragment>
         )}
       </div>
