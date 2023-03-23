@@ -37,7 +37,7 @@ const Category = () => {
       ) : recipes.length > 0 ? (
         <div className='container mb-20 space-y-16 md:space-y-20'>
           {recipes.map((recipe: any) => (
-            <Preview key={recipe.id} recipe={recipe} />
+            <Preview key={recipe.id} recipe={recipe} isCategory={true} />
           ))}
         </div>
       ) : (

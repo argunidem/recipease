@@ -9,7 +9,7 @@ import Ingredients from '../components/create/Ingredients';
 import Instructions from '../components/create/Instructions';
 import Spinner from '../components/shared/Spinner';
 import { v4 as uuidv4 } from 'uuid';
-import { categories, categorySlugs } from '../categories';
+import { categories } from '../categories';
 import { BiCategory } from 'react-icons/bi';
 import { ImSpoonKnife } from 'react-icons/im';
 import { MdOutlineDescription } from 'react-icons/md';

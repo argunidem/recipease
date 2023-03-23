@@ -8,6 +8,7 @@ import {
   BsSearch,
   BsFillQuestionSquareFill,
 } from 'react-icons/bs';
+import { ImSpoonKnife } from 'react-icons/im';
 import { AiFillHome, AiOutlinePlus } from 'react-icons/ai';
 
 const Sidebar = () => {
@@ -111,6 +112,20 @@ const Sidebar = () => {
             <span className={`font-medium ${!open && 'hidden'}`}>About</span>
           </Link>
           <Categories states={{ open, setOpen, submenuOpen, setSubmenuOpen }} />
+          <Link
+            to='/my-recipes'
+            onClick={() => setOpen(false)}
+            className={`sidebar-item ${!open && 'justify-center'}`}
+          >
+            <span className='text-2xl'>
+              <ImSpoonKnife />
+            </span>
+            <span
+              className={`font-medium h-6 overflow-hidden ${!open && 'hidden'}`}
+            >
+              My Recipes
+            </span>
+          </Link>
         </div>
       </div>
     </div>

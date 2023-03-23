@@ -1,10 +1,10 @@
-import { doc, getDoc } from 'firebase/firestore';
 import { Fragment, useEffect, useState } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { db } from '../../firebase.config';
 import Card from '../shared/Card';
 
-const Preview = ({ recipe }: any) => {
+const Preview = ({ recipe, isCategory = false }: any) => {
   const [width, setWidth] = useState(window.innerWidth);
   const [username, setUsername] = useState('');
   const { category, description, image, name, timestamp, userRef } =
@@ -80,7 +80,11 @@ const Preview = ({ recipe }: any) => {
         )}
 
         <Link
-          to={`/${category}/${recipe.id}`}
+          to={
+            isCategory
+              ? `/${category}/${recipe.id}`
+              : `/my-recipes/${recipe.id}`
+          }
           className='btn-xs flex items-center xs:btn-sm sm:btn-md w-max self-end my-2 rounded-md bg-slate-700 text-white md:mt-0 mdlg:border-none mdlg:bg-slate-700 mdlg:text-white'
         >
           View Recipe

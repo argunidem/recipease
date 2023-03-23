@@ -1,12 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {
   collection,
-  getDocs,
   query,
-  where,
   orderBy,
-  limit,
-  startAfter,
   Timestamp,
   onSnapshot,
 } from 'firebase/firestore';
@@ -29,7 +25,6 @@ type RecipesType = {
 
 type ContextType = {
   recipes: RecipesType;
-  loading: boolean;
 };
 
 type ProviderProps = {
@@ -52,7 +47,6 @@ const RecipeProvider = ({ children }: ProviderProps) => {
       instructions: [],
     },
   });
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const recipesRef = collection(db, 'recipes');
@@ -68,7 +62,6 @@ const RecipeProvider = ({ children }: ProviderProps) => {
           });
         });
         setRecipes(recipes);
-        setLoading(false);
       },
       (error) => {
         toast.error('Could not fetch recipes');
@@ -82,7 +75,7 @@ const RecipeProvider = ({ children }: ProviderProps) => {
   }, []);
 
   return (
-    <RecipeContext.Provider value={{ recipes, loading }}>
+    <RecipeContext.Provider value={{ recipes }}>
       {children}
     </RecipeContext.Provider>
   );

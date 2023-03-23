@@ -1,6 +1,7 @@
-import { Fragment, useState, useEffect } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, deleteDoc } from 'firebase/firestore';
+import { AuthContext } from '../context/auth/AuthContext';
 import { db } from '../firebase.config';
 import Section from '../components/shared/Section';
 import Spinner from '../components/shared/Spinner';
@@ -9,7 +10,9 @@ const Recipe = () => {
   const [recipe, setRecipe] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [username, setUsername] = useState('');
+  const [canDelete, setCanDelete] = useState(false);
 
+  const context = useContext(AuthContext);
   const navigate = useNavigate();
   const params: any = useParams();
 
@@ -19,10 +22,12 @@ const Recipe = () => {
       if (userDoc.exists()) {
         setUsername(userDoc.data().name);
       }
+
+      if (recipe?.userRef === context?.user?.id) setCanDelete(true);
     };
 
     if (recipe) fetchUser();
-  }, [recipe]);
+  }, [recipe, context?.user?.id]);
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -47,6 +52,12 @@ const Recipe = () => {
     fetchRecipe();
   }, [navigate, params.recipeId]);
 
+  useEffect(() => {}, []);
+
+  const deleteRecipe = async (id: string) => {
+    await deleteDoc(doc(db, 'recipes', id));
+  };
+
   return (
     <Section>
       <div className='relative flex flex-col max-w-7xl mx-auto my-20 rounded-md xs:px-4 xs:mt-28 md:mt-32'>
@@ -55,6 +66,57 @@ const Recipe = () => {
         ) : (
           <Fragment>
             <div>
+              {canDelete && (
+                <Fragment>
+                  {/* Modal */}
+                  <label
+                    htmlFor='my-modal'
+                    className='absolute -top-9 right-0 rounded-md bg-red-700 text-white cursor-pointer hover:bg-red-600 xs:right-4 sm:-top-14'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='h-6 w-6'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M6 18L18 6M6 6l12 12'
+                      />
+                    </svg>
+                  </label>
+                  <input
+                    type='checkbox'
+                    id='my-modal'
+                    className='modal-toggle'
+                  />
+                  <div className='modal'>
+                    <div className='modal-box bg-recipease-50'>
+                      <p className='font-bold text-lg text-white'>
+                        Delete Recipe?
+                      </p>
+                      <div className='modal-action'>
+                        <label
+                          onClick={() => deleteRecipe(params.recipeId)}
+                          htmlFor='my-modal'
+                          className='btn bg-white text-recipease-50 hover:border-white hover:bg-recipease-50 hover:border hover:text-white'
+                        >
+                          Yes
+                        </label>
+                        <label
+                          htmlFor='my-modal'
+                          className='btn btn-outline text-white hover:bg-white hover:text-recipease-50'
+                        >
+                          no
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </Fragment>
+              )}
               <span className='absolute -top-9 left-0 text-xs xs:left-3.5 sm:text-sm sm:-top-6 '>
                 by {username}
               </span>
