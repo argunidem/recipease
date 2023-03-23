@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HiPuzzlePiece } from 'react-icons/hi2';
 import { IoMdClose } from 'react-icons/io';
 import { toast } from 'react-toastify';
 
 type IngredientsProps = {
   listHandler: (value: string | number) => void;
+  editIngredients?: string[];
 };
 
-const Ingredients = ({ listHandler }: IngredientsProps) => {
+const Ingredients = ({ listHandler, editIngredients }: IngredientsProps) => {
   const [list, setList] = useState<string[]>([]);
   const [ingredient, setIngredient] = useState('');
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if (editIngredients) setList(editIngredients);
+  }, [editIngredients]);
 
   const onchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIngredient(e.target.value);

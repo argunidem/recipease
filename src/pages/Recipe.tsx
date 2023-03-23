@@ -5,6 +5,7 @@ import { AuthContext } from '../context/auth/AuthContext';
 import { db } from '../firebase.config';
 import Section from '../components/shared/Section';
 import Spinner from '../components/shared/Spinner';
+import { AiFillEdit } from 'react-icons/ai';
 
 const Recipe = () => {
   const [recipe, setRecipe] = useState<any>(null);
@@ -56,6 +57,7 @@ const Recipe = () => {
 
   const deleteRecipe = async (id: string) => {
     await deleteDoc(doc(db, 'recipes', id));
+    navigate('/');
   };
 
   return (
@@ -71,22 +73,9 @@ const Recipe = () => {
                   {/* Modal */}
                   <label
                     htmlFor='my-modal'
-                    className='absolute -top-9 right-0 rounded-md bg-red-700 text-white cursor-pointer hover:bg-red-600 xs:right-4 sm:-top-14'
+                    className='absolute -top-9 right-0 w-8 flex items-center justify-center text-xl pb-1 rounded-md bg-red-700 text-white cursor-pointer hover:bg-red-600 xs:right-4 sm:-top-14'
                   >
-                    <svg
-                      xmlns='http://www.w3.org/2000/svg'
-                      className='h-6 w-6'
-                      fill='none'
-                      viewBox='0 0 24 24'
-                      stroke='currentColor'
-                    >
-                      <path
-                        strokeLinecap='round'
-                        strokeLinejoin='round'
-                        strokeWidth='2'
-                        d='M6 18L18 6M6 6l12 12'
-                      />
-                    </svg>
+                    x
                   </label>
                   <input
                     type='checkbox'
@@ -114,6 +103,13 @@ const Recipe = () => {
                         </label>
                       </div>
                     </div>
+                  </div>
+
+                  <div
+                    onClick={() => navigate(`/edit/${params.recipeId}`)}
+                    className='absolute -top-9 right-8 w-8 h-8 flex items-center justify-center text-xl pb-1 rounded-md bg-teal-600 text-white cursor-pointer hover:bg-teal-500 xs:right-12 sm:-top-14'
+                  >
+                    <AiFillEdit />
                   </div>
                 </Fragment>
               )}

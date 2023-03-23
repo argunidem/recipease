@@ -33,9 +33,7 @@ const App = () => {
             <Route path='/create' element={<Private />}>
               <Route path='/create' element={<Create />} />
             </Route>
-            <Route path='/edit' element={<Private />}>
-              <Route path='/edit' element={<Edit />} />
-            </Route>
+            <Route path='/edit/:recipeId' element={<Edit />} />
             <Route path='/profile' element={<Private />}>
               <Route path='/profile' element={<Profile />} />
             </Route>

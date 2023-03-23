@@ -1,16 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BsInfoSquareFill } from 'react-icons/bs';
 import { IoMdClose } from 'react-icons/io';
 import { toast } from 'react-toastify';
 
 type IngredientsProps = {
   listHandler: (value: string | number, instruction: boolean) => void;
+  editInstructions?: string[];
 };
 
-const Instructions = ({ listHandler }: IngredientsProps) => {
+const Instructions = ({ listHandler, editInstructions }: IngredientsProps) => {
   const [list, setList] = useState<string[]>([]);
   const [ingredient, setIngredient] = useState('');
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    if (editInstructions) setList(editInstructions);
+  }, [editInstructions]);
 
   const onchange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIngredient(e.target.value);
