@@ -10,7 +10,7 @@ import Ingredients from '../components/create/Ingredients';
 import Instructions from '../components/create/Instructions';
 import Spinner from '../components/shared/Spinner';
 import { v4 as uuidv4 } from 'uuid';
-import { categories } from '../categories';
+import { categories, categorySlugs } from '../categories';
 import { BiCategory } from 'react-icons/bi';
 import { ImSpoonKnife } from 'react-icons/im';
 import { MdOutlineDescription } from 'react-icons/md';
@@ -30,7 +30,7 @@ const Edit = () => {
   const [formData, setFormData] = useState<FormDataType>({
     name: '',
     description: '',
-    category: 'Appetizers',
+    category: '',
     ingredients: [],
     instructions: [],
     image: null,
@@ -52,7 +52,7 @@ const Edit = () => {
         return recipe.id === params.recipeId;
       });
       setFormData((prevState) => ({
-        ...formData,
+        ...prevState,
         ...recipe.data,
       }));
     }
@@ -201,7 +201,8 @@ const Edit = () => {
                 <BiCategory className='authentication-icon top-4' />
                 <select
                   id='category'
-                  value={category}
+                  // value={category}
+                  value={categories[categorySlugs.indexOf(category)]}
                   onChange={onchange}
                   required
                   className='input-field select outline-none focus:outline-none'
@@ -232,11 +233,9 @@ const Edit = () => {
                   handleImageChange(e);
                 }}
                 accept='.jpg,.png,.jpeg'
-                className='input-field text-sm bg-neutral py-2
-        file:my-1 file:mr-2 file:px-3
-        file:rounded-md file:border file:border-slate-300
-        file:text-sm file:font-medium
-        file:bg-neutral hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
+                className='input-field text-sm bg-neutral py-2 file:my-1 file:mr-2 file:px-3 file:rounded-md file:border file:border-slate-300
+                file:text-sm file:font-medium
+                file:bg-neutral hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
               />
               <button
                 type='submit'

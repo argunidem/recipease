@@ -57,7 +57,7 @@ const Recipe = () => {
 
   const deleteRecipe = async (id: string) => {
     await deleteDoc(doc(db, 'recipes', id));
-    navigate('/');
+    navigate('/my-recipes');
   };
 
   return (
