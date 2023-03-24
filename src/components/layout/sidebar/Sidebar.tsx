@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
 import { AuthContext } from '../../../context/auth/AuthContext';
 import Search from './Search';
 import Categories from './Categories';
@@ -89,20 +88,24 @@ const Sidebar = () => {
             <span className={`font-medium ${!open && 'hidden'}`}>About</span>
           </Link>
           <Categories states={{ open, setOpen, submenuOpen, setSubmenuOpen }} />
-          <Link
-            to='/my-recipes'
-            onClick={() => setOpen(false)}
-            className={`sidebar-item ${!open && 'justify-center'}`}
-          >
-            <span className='text-2xl'>
-              <ImSpoonKnife />
-            </span>
-            <span
-              className={`font-medium h-6 overflow-hidden ${!open && 'hidden'}`}
+          {context?.loggedIn && (
+            <Link
+              to='/my-recipes'
+              onClick={() => setOpen(false)}
+              className={`sidebar-item ${!open && 'justify-center'}`}
             >
-              My Recipes
-            </span>
-          </Link>
+              <span className='text-2xl'>
+                <ImSpoonKnife />
+              </span>
+              <span
+                className={`font-medium h-6 overflow-hidden ${
+                  !open && 'hidden'
+                }`}
+              >
+                My Recipes
+              </span>
+            </Link>
+          )}
         </div>
       </div>
     </div>
