@@ -201,7 +201,6 @@ const Edit = () => {
                 <BiCategory className='authentication-icon top-4' />
                 <select
                   id='category'
-                  // value={category}
                   value={categories[categorySlugs.indexOf(category)]}
                   onChange={onchange}
                   required
@@ -213,14 +212,6 @@ const Edit = () => {
                 </select>
               </div>
 
-              <Ingredients
-                listHandler={listHandler}
-                editIngredients={formData.ingredients}
-              />
-              <Instructions
-                listHandler={listHandler}
-                editInstructions={formData.instructions}
-              />
               <img
                 src={imageUrl ? imageUrl : formData.image}
                 alt='food'
@@ -233,10 +224,20 @@ const Edit = () => {
                   handleImageChange(e);
                 }}
                 accept='.jpg,.png,.jpeg'
-                className='input-field text-sm bg-neutral py-2 file:my-1 file:mr-2 file:px-3 file:rounded-md file:border file:border-slate-300
+                className='input-field text-sm bg-recipease-700 py-2 file:my-1 file:mr-2 file:px-3 file:rounded-md file:border file:border-slate-300
                 file:text-sm file:font-medium
-                file:bg-neutral hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
+                file:bg-recipease-700 hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
               />
+
+              <Ingredients
+                listHandler={listHandler}
+                editIngredients={formData.ingredients}
+              />
+              <Instructions
+                listHandler={listHandler}
+                editInstructions={formData.instructions}
+              />
+
               <button
                 type='submit'
                 className='btn w-full text-white bg-recipease-50 border-none '

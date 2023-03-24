@@ -39,7 +39,7 @@ const Instructions = ({ listHandler, editInstructions }: IngredientsProps) => {
   return (
     <div className='flex w-full flex-col justify-center space-y-0.5'>
       <div className='relative'>
-        <span className='absolute top-0 right-0 w-12 bg-base-100 flex items-center justify-center border-b border-l rounded-tr-md border-white'>
+        <span className='absolute top-0 right-0 w-12 bg-recipease-50 flex items-center justify-center border-b border-l rounded-tr-md border-white'>
           {count}
         </span>
         <textarea
@@ -52,13 +52,13 @@ const Instructions = ({ listHandler, editInstructions }: IngredientsProps) => {
       </div>
       <button
         onClick={(e) => onclick()}
-        className='btn w-full hover:btn-outline'
+        className='btn w-full bg-recipease-700 text-white hover:bg-recipease-800'
       >
         Add Instruction
       </button>
-      <div className='relative bg-neutral py-2 rounded-md'>
+      <div className='relative bg-slate-300 text-recipease-800 py-2 rounded-md'>
         <BsInfoSquareFill className='authentication-icon top-2 xs:top-3' />
-        <p className='text-center text-xs xs:text-base'>
+        <p className='text-center text-xs font-medium xs:text-base'>
           {list.length < 1 ? 'No instructions added' : 'Instructions List'}
         </p>
 
@@ -69,7 +69,7 @@ const Instructions = ({ listHandler, editInstructions }: IngredientsProps) => {
               index === 0 && 'border-t mt-2'
             } ${index !== list.length - 1 && 'border-b'}`}
           >
-            <span className='bg-base-100 w-6 h-6 rounded-lg text-center'>
+            <span className='bg-base-100 text-slate-300 w-6 h-6 rounded-lg text-center'>
               {index + 1}
             </span>
             <p

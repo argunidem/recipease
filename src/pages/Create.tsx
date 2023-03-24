@@ -174,19 +174,21 @@ const Create = () => {
                 </select>
               </div>
 
-              <Ingredients listHandler={listHandler} />
-              <Instructions listHandler={listHandler} />
               <input
                 type='file'
                 onChange={onchange}
                 accept='.jpg,.png,.jpeg'
                 required
-                className='input-field text-sm bg-neutral py-2
+                className='input-field text-sm bg-recipease-700 py-2
             file:my-1 file:mr-2 file:px-3
             file:rounded-md file:border file:border-slate-300
             file:text-sm file:font-medium
-            file:bg-neutral hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
+            file:bg-recipease-700 hover:file:cursor-pointer hover:file:bg-slate-200 hover:file:text-slate-800'
               />
+
+              <Ingredients listHandler={listHandler} />
+              <Instructions listHandler={listHandler} />
+
               <button
                 type='submit'
                 className='btn w-full text-white bg-recipease-50 border-none '

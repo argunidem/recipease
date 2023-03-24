@@ -14,6 +14,7 @@ import Create from './pages/Create';
 import Edit from './pages/Edit';
 import Recipe from './pages/Recipe';
 import MyRecipes from './pages/MyRecipes';
+import Search from './pages/Search';
 import Header from './components/layout/Header';
 import Sidebar from './components/layout/sidebar/Sidebar';
 
@@ -30,6 +31,7 @@ const App = () => {
             <Route path='/:category' element={<Category />} />
             <Route path='/:category/:recipeId' element={<Recipe />} />
             <Route path='/my-recipes' element={<MyRecipes />} />
+            <Route path='/search' element={<Search />} />
             <Route path='/create' element={<Private />}>
               <Route path='/create' element={<Create />} />
             </Route>

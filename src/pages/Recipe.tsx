@@ -73,7 +73,7 @@ const Recipe = () => {
                   {/* Modal */}
                   <label
                     htmlFor='my-modal'
-                    className='absolute -top-9 right-0 w-8 flex items-center justify-center text-xl pb-1 rounded-md bg-red-700 text-white cursor-pointer hover:bg-red-600 xs:right-4 sm:-top-14'
+                    className='absolute -top-9 right-0 w-8 flex items-center justify-center text-xl pb-1 rounded-md bg-rose-700 text-white cursor-pointer hover:bg-red-600 xs:right-4 sm:-top-14'
                   >
                     x
                   </label>
@@ -107,7 +107,7 @@ const Recipe = () => {
 
                   <div
                     onClick={() => navigate(`/edit/${params.recipeId}`)}
-                    className='absolute -top-9 right-8 w-8 h-8 flex items-center justify-center text-xl pb-1 rounded-md bg-teal-600 text-white cursor-pointer hover:bg-teal-500 xs:right-12 sm:-top-14'
+                    className='absolute -top-9 right-9 w-8 h-8 flex items-center justify-center text-xl pb-1 rounded-md bg-recipease-200 text-white cursor-pointer hover:bg-recipease-100 xs:right-14 sm:-top-14'
                   >
                     <AiFillEdit />
                   </div>

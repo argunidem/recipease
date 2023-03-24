@@ -19,7 +19,9 @@ body {
   background-color: white;
 }
 
-body::-webkit-scrollbar {
+body::-webkit-scrollbar,
+select::-webkit-scrollbar,
+.search-results::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -31,13 +33,41 @@ body::-webkit-scrollbar-thumb {
   background: #203260;
 }
 
-body::-webkit-scrollbar-thumb:hover {
+body::-webkit-scrollbar-thumb:hover,
+select::-webkit-scrollbar-thumb:hover {
   background: #394c77;
 }
 
+select::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+select::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 2px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: #e3e3e3;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: #acacac;
+}
+
 input:-webkit-autofill {
-  -webkit-box-shadow: inset 0 0 0 50px #43537d !important;
+  -webkit-box-shadow: inset 0 0 0 50px #19284d !important;
   -webkit-text-fill-color: #c9c9c9 !important;
+}
+
+.search-results {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.7s ease-out;
+}
+
+.search-results.show {
+  max-height: 160px;
 }
 
 @layer utilities {
@@ -71,7 +101,7 @@ input:-webkit-autofill {
     @apply flex flex-col items-center space-y-5;
   }
   .input-field {
-    @apply w-full min-w-[200px] xs:w-72 pl-9 text-sm placeholder:text-gray-400 placeholder:font-semibold focus:bg-recipease-400 selection:bg-slate-500 selection:text-slate-800;
+    @apply w-full min-w-[200px] xs:w-72 bg-recipease-700 pl-9 text-sm placeholder:text-gray-400 placeholder:font-semibold focus:bg-recipease-800 selection:bg-slate-500 selection:text-slate-800;
   }
 }
 

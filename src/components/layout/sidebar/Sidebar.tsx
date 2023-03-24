@@ -1,11 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/auth/AuthContext';
+import Search from './Search';
 import Categories from './Categories';
 import {
   BsArrowLeftSquareFill,
-  BsSearch,
   BsFillQuestionSquareFill,
 } from 'react-icons/bs';
 import { ImSpoonKnife } from 'react-icons/im';
@@ -15,7 +15,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(false);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+
   const context = useContext(AuthContext);
 
   const detectScroll = () => {
@@ -65,32 +65,9 @@ const Sidebar = () => {
               <span className={`font-medium ${!open && 'hidden'}`}>Create</span>
             </Link>
           )}
-          <div className='relative flex items-center rounded-md mt-5'>
-            <input
-              type='text'
-              placeholder='Search'
-              ref={inputRef}
-              className={`duration-300 ${
-                open
-                  ? 'w-full pr-11 pl-2 bg-white text-slate-600 font-semibold selection:bg-slate-700 selection:text-white'
-                  : 'w-0  bg-transparent'
-              }`}
-            />
-            <span
-              className={`sidebar-item mt-0 absolute right-0 top-0 text-white text-2xl border-none outline-none cursor-pointer ${
-                open
-                  ? 'rounded-l-none rounded-r-md bg-recipease-200 hover:bg-recipease-100'
-                  : 'btn btn-ghost rounded-md'
-              }`}
-            >
-              <BsSearch
-                onClick={() => {
-                  setOpen(!open);
-                  if (!open) inputRef.current?.focus();
-                }}
-              />
-            </span>
-          </div>
+
+          <Search states={{ open, setOpen }} />
+
           <Link
             to='/'
             onClick={() => setOpen(false)}

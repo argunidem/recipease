@@ -3,6 +3,7 @@ import './index.css';
 import App from './App';
 import AuthProvider from './context/auth/AuthContext';
 import RecipeProvider from './context/recipe/RecipeContext';
+import SearchProvider from './context/search/SearchContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <AuthProvider>
     <RecipeProvider>
-      <App />
+      <SearchProvider>
+        <App />
+      </SearchProvider>
     </RecipeProvider>
   </AuthProvider>
 );
